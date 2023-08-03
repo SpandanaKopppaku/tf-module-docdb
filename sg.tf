@@ -7,7 +7,7 @@ resource "aws_security_group" "allows_docbd" {
     from_port   = 27017
     to_port     = 27017
     protocol    = "tcp"
-    cidr_blocks = [ata.terraform_remote_state.vpc.VPC_CIDR]
+    cidr_blocks = [data.terraform_remote_state.vpc.VPC_CIDR, data.terraform_remote_state.vpc.DEFAULT_VPC_CIDR]
   }
 
   egress {
