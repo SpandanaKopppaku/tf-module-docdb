@@ -5,7 +5,7 @@ resource "aws_docdb_cluster" "docdb" {
   master_password           = "roboshop1"
   skip_final_snapshot       = true 
   vpc_security_group_ids    = ? 
-  db_subnet_group_name      = ? 
+  db_subnet_group_name      = aws_docdb_subnet_group.aws_docdb_subnet_group.name
 
 #   backup_retention_period   = 14
 #   preferred_backup_window   = "02:00-05:00"
@@ -13,9 +13,9 @@ resource "aws_docdb_cluster" "docdb" {
 
 # Creates subnet group
 
-resource "aws_docdb_subnet_group" "docdb" {
-  name       = "main"
-  subnet_ids = [aws_subnet.frontend.id, aws_subnet.backend.id]
+resource "aws_docdb_subnet_group" "aws_docdb_subnet_group" {
+  name       = "roboshop-docdb-${var.ENV}-subnetgroup"
+  subnet_ids = [data.terraform_remote_state.vpc.PRIVATE_SUBNET_IDS]
 
   tags = {
     Name = "My docdb subnet group"
