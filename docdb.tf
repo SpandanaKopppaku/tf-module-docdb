@@ -18,6 +18,6 @@ resource "aws_docdb_subnet_group" "aws_docdb_subnet_group" {
   subnet_ids = [data.terraform_remote_state.vpc.PRIVATE_SUBNET_IDS]
 
   tags = {
-    Name = "My docdb subnet group"
+    Name = "roboshop-docdb-${var.ENV}-subnetgroup"
   }
 }
