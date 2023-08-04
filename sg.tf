@@ -1,7 +1,7 @@
 resource "aws_security_group" "allows_docbd" {
   name        = "allows_docdb_internal only"
   description = "allows_docdb_internal only"
-  VPC_ID      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
     description = "docdb from VPC"
